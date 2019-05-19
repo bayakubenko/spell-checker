@@ -53,7 +53,12 @@ public class BloomFilter {
 	public BloomFilter(int expectedElementsTotal, int totalBits) {
 		this(expectedElementsTotal);
 
+		if (totalBits > Integer.MAX_VALUE) {
+			totalBits = Integer.MAX_VALUE;
+		}
+		
 		this.totalBits = totalBits;
+		
 		this.bitset = new BitSet(this.totalBits);
 		this.numberOfHashes = computeOptimalNumberOfHashes(expectedElementsTotal, totalBits);
 		this.falsePositiveProbability = computeFalsePositiveProbability(expectedElementsTotal, totalBits, this.numberOfHashes);
@@ -63,7 +68,12 @@ public class BloomFilter {
 		this(expectedElementsTotal);
 
 		this.totalBits = computeOptimalBitSize(expectedElementsTotal, falsePositiveProbability);
-		this.numberOfHashes = computeOptimalNumberOfHashes(expectedElementsTotal, totalBits);
+		
+		if (this.totalBits > Integer.MAX_VALUE) {
+			this.totalBits = Integer.MAX_VALUE;
+		}
+		
+		this.numberOfHashes = computeOptimalNumberOfHashes(expectedElementsTotal, this.totalBits);
 		
 		this.bitset = new BitSet(this.totalBits);
 		this.falsePositiveProbability = falsePositiveProbability;
