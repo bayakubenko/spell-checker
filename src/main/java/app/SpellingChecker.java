@@ -31,13 +31,11 @@ public class SpellingChecker {
 
 	/**
 	 * Populates a bloom filter with words extracted from local file {@code dictionarySourcePath}.
-	 * The bloom filter is configured with default values {@code DEFAULT_NUMBER_OF_ELEMENTS} and 
-	 * {@code DEFAULT_NUMBER_OF_BITS}.
+	 * The bloom filter is configured with default value for {@code DEFAULT_FALSE_POSITIVE_PROBABILITY}
 	 * @param dictionarySourcePath
 	 * @throws IOException Exception is thrown if the local input file can not be processed.
 	 */
 	public SpellingChecker(String dictionarySourcePath) throws IOException {
-		//this(dictionarySourcePath, new BloomFilter(DEFAULT_NUMBER_OF_ELEMENTS, DEFAULT_NUMBER_OF_BITS));
 		this(dictionarySourcePath, new BloomFilter(DEFAULT_NUMBER_OF_ELEMENTS, DEFAULT_FALSE_POSITIVE_PROBABILITY));
 	}
 	
